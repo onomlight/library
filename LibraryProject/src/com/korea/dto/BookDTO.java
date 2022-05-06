@@ -1,6 +1,6 @@
 package com.korea.dto;
 
-public class BookDTO {
+public class BookDTO extends DTO{
 
 	private String book_Code;
 	private String book_Name;

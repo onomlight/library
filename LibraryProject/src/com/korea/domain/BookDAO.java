@@ -11,14 +11,7 @@ public class BookDAO {
 
 	
 	//연결관련 정보 저장용 변수
-			String id="root";
-			String pw="1234";
-			String url="jdbc:mysql://localhost:3306/librarydb";
-			//ㄴ 연결할 db명 입력 
-			//DB연결관련 객체를 위한 참조 변수
-			Connection conn=null;				// DB 연결객체
-			PreparedStatement pstmt = null;		// SQL 쿼리 전송 객체
-			ResultSet rs = null;				// 쿼리결과(Select) 수신용 객체
+		
 
 			
 			public BookDAO(){ // bookdao가 생성할때마다 연결 
