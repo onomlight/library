@@ -6,64 +6,72 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.korea.dto.BookDTO;
-	//Book_Tbl과 연결되어 조회/삽입/수정/삭제하는데 사용
-	// DB연동 코드가 기본으로 Setup 
+
 public class BookDAO {
-	//연결 정보
-	private String driver="com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/librarydb";
-	private String id = "root";
-	private String pw = "1234";
+
 	
-	
-	// 연결객체 정보
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
-	private Connection conn = null;
+	//연결관련 정보 저장용 변수
+			String id="root";
+			String pw="1234";
+			String url="jdbc:mysql://localhost:3306/librarydb";
+			//ㄴ 연결할 db명 입력 
+			//DB연결관련 객체를 위한 참조 변수
+			Connection conn=null;				// DB 연결객체
+			PreparedStatement pstmt = null;		// SQL 쿼리 전송 객체
+			ResultSet rs = null;				// 쿼리결과(Select) 수신용 객체
+
 			
-	
-	// 생성자(객체 생성시 DBMS연결 )
-	public BookDAO(){
-		try {
-			Class.forName(driver);
-			System.out.println("Driver Loading Success");
-			conn=DriverManager.getConnection(url,id,pw);
-			System.out.println("DBConnected...");
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// 조회
-	void Select() {
-		
-	}
-	// 삽입
-	public void Insert(BookDTO dto) {
-		try {
-			// Controller로 부터 받은 도서 정보를 Book_Tbl에 저장
-			pstmt=conn.prepareStatement("insert into book_tbl values(?,?)");
-			pstmt.setString(1, dto.getBookCode());
-			pstmt.setString(0, dto.getBookName());
-			int result = pstmt.executeUpdate();
-			if(result!=0) {
-				System.out.println("도서 등록 완료!");
-			}else {
-				System.out.println("도서 등록실패..");
+			public BookDAO(){ // bookdao가 생성할때마다 연결 
+				
+			//연결
+			try {
+				//DB Driver 로드
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				System.out.println("Driver Loading Success!");
+				//DB연결객체 생성
+				conn=DriverManager.getConnection(url, id, pw);
+				System.out.println("DB Connected..");
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			try {pstmt.close();}catch(Exception e) {e.printStackTrace();}
-		}
-	}
-	// 수정
-	void Update() {
-		
-	}
-	// 삭제
-	void Delete() {
-		
-	}
-}
+
+			}// 생성자 끝
+			
+			// 도서 정보 조회 num:1
+			 public void Select() {}
+			// 도서 정보 추가 2
+			 public boolean Insert(BookDTO dto) {
+				 // boolean으로 잘연결되었는지 T/F로 확인
+				 try {
+					 pstmt = conn.prepareStatement("insert into book_tbl values(?,?,?,?,?)");
+					 pstmt.setString(1, dto.getBook_Code());
+					 // 첫번째 물음표 / 첫번째로 북코드를 꺼내서 넣어줌 
+					 // 
+					 pstmt.setString(2, dto.getBook_Name());
+					 
+					 pstmt.setString(3, dto.getBook_Author());
+					 
+					 pstmt.setString(4, dto.getPublisher());
+					 
+					 pstmt.setInt(5, dto.getIsRantal());
+					 int result =  pstmt.executeUpdate();
+					 
+					 if(result!=0) {
+						 return true; // INSERT 성공!
+					 }
+					 
+				 }catch(Exception e) {
+					 e.printStackTrace();
+				 } finally {
+					 try {pstmt.close();}catch(Exception e) {e.printStackTrace();}
+				 }
+				 return false;
+			 }
+			// 도서 정보 수정 3
+			 public void Update() {}
+			// 도서 정보 삭제 4
+			 public void Delete() {}
+} 
+

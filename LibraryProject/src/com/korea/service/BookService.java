@@ -1,28 +1,21 @@
 package com.korea.service;
 
 import com.korea.domain.BookDAO;
-import com.korea.dto.BookDTO;
 
 public class BookService {
-
-	//Dao와 연결
+		//맴버
 	BookDAO dao = new BookDAO();
 	
 	
-	//조회
-	public void Select() {
-		
-	}
-	//삽입
-	public void Insert(BookDTO dto) {
-		dao.Insert(dto); // dao 의 insert 기능사용
+	// 조회
+	
+	//추가
+	public boolean Insert(BookDTD dtd) {
+		return dao.Insert(dtd); // 전달받은 dto를 dao로 넘김
+								// 그리고 반환되는 값을 controller로 전달 (True /False);
 	}
 	//수정
-	public void Update() {
-		
-	}
+	
 	//삭제
-	public void Delete() {
-		
-	}
+	
 }

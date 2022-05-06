@@ -2,14 +2,14 @@ package com.korea.view;
 
 import java.util.Scanner;
 
-import com.korea.controller.FrontController;
+
 import com.korea.dto.BookDTO;
 
 public class Viewer {
 	int num;
 	Scanner sc = new Scanner(System.in);
 	// 컨트롤러 객체를 추가 
-	FrontController controller = new FrontController();
+	 
 	// 메인메뉴
 	public void MainMenu(){ 
 	while(true)
@@ -64,8 +64,8 @@ public class Viewer {
 				System.out.println("도서코드|도서명>");
 				String Code = sc.next();
 				String Name = sc.next();
-				BookDTO dto = new BookDTO(Code,Name);
-				controller.SubConExecute("BOOK", 2, dto);//컨트롤러key,서비스번호,bookdto
+				 
+				 //컨트롤러key,서비스번호,bookdto
 						
 				break;
 			case 3: // 수정
