@@ -28,8 +28,16 @@ public class Main {
 		// 3 View - Controller
 		
 		Viewer view1 = new Viewer();
-		view1.BookMenu();
+//		view1.BookMenu();
+//		
+		
+		// 4 view - LoginController
+
+		view1.LoginMenu();
+		
 	}
+	
+
 	
 
 }

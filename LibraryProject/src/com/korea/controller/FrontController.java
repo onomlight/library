@@ -7,7 +7,7 @@ import com.korea.dto.DTO;
 
 public class FrontController {
 	// 서브 컨트롤러 저장용
-	Map<String,SubController> map = new HashMap();
+	private Map<String,SubController> map = new HashMap();
 	
 	public FrontController(){
 		Init(); // map 에 Init 에 지정된 대로 서브 컨트롤러가 추가됨
@@ -19,7 +19,7 @@ public class FrontController {
 		 map.put("AUTH", new AuthController());
 	}
 	//MAP에 있는 서브컨트롤러를 꺼내어 해당 컨트롤러를 실행하는 함수 
-	public boolean SubControllerEX(String menu, int num , DTO dto) {
+	public boolean SubControllerEX(String menu,int num, DTO dto) {
 		SubController tmp; // 사용자가 요청하는 컨트롤러와 직원/회원 로그인에 대한 번호 전달되고 사용자에게 전달받은 dto가 전달됨 
 		if(menu.equals("BOOK")) 
 		{
